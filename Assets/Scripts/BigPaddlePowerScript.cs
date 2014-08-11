@@ -3,8 +3,8 @@ using System.Collections;
 
 public class BigPaddlePowerScript : PowerScript 
 {
-	
-	void Start () 
+
+	public override void Start () 
 	{
 		base.Start();
 	}
