@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BallScript : MonoBehaviour{
+public class BallScript : MonoBehaviour
+{
 
 	public Vector2 rightForce = new Vector2(50,10);
 	public Vector2 leftForce = new Vector2(-50,-10);
@@ -45,7 +46,7 @@ public class BallScript : MonoBehaviour{
 		addForceToBall(randomNumber);
 	}
 
-	//Give the impluse to the ball first move
+	//Give the impluse to the ball first move in a direction decided by a random number
 	private void addForceToBall(float randomNumber)
 	{
 		if(randomNumber <= 0.5f)

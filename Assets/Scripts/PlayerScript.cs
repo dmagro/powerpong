@@ -3,7 +3,8 @@ using System.Collections;
 
 public class PlayerScript : MonoBehaviour
 {
-	const float slack = 2.5f;
+
+	public readonly int maxPowers = 3;
 
 	const string verticalCommandsPlayer1 = "VerticalAlt";
 	const string horizontalCommandsPlayer1 = "HorizontalAlt";
@@ -15,6 +16,7 @@ public class PlayerScript : MonoBehaviour
 	public bool isPlayer1 = true;
 
 	private Vector2 movement;
+	private int numberOfPowers = 0;
 
 	void Update()
 	{
@@ -45,14 +47,14 @@ public class PlayerScript : MonoBehaviour
 	//Determines the area that a player can move
 	private void playerBoundaries()
 	{
-		Tuple<float, float, float, float> cameraBorders = getCameraBorders();
+		Tuple<float, float, float, float> cameraBorders = Utilities.getCameraBorders(transform);
 
 		float leftBorder = cameraBorders.Item1;
 		float rightBorder = cameraBorders.Item2;
 		float topBorder = cameraBorders.Item3;
 		float bottomBorder = cameraBorders.Item4;
 
-		Tuple<float, float, float, float> playerBorders = getPlayerHorizontalBorders(leftBorder, rightBorder);
+		Tuple<float, float, float, float> playerBorders = Utilities.getPlayerHorizontalBorders(leftBorder, rightBorder, isPlayer1);
 		
 		transform.position = new Vector3(
 			Mathf.Clamp(transform.position.x, playerBorders.Item1, playerBorders.Item2),
@@ -61,53 +63,24 @@ public class PlayerScript : MonoBehaviour
 			);
 	}
 
-	//Get the main camera boundaries and return them as a tuple
-	private Tuple<float, float, float, float> getCameraBorders()
+
+
+	//Return the number of powers that a player is using
+	public int getNumberOfPowers()
 	{
-
-		float dist = (transform.position - Camera.main.transform.position).z;
-
-		float leftBorder = Camera.main.ViewportToWorldPoint(
-			new Vector3(0, 0, dist)
-			).x;
-		
-		float rightBorder = Camera.main.ViewportToWorldPoint(
-			new Vector3(1, 0, dist)
-			).x;
-		
-		float topBorder = Camera.main.ViewportToWorldPoint(
-			new Vector3(0, 0, dist)
-			).y;
-		
-		float bottomBorder = Camera.main.ViewportToWorldPoint(
-			new Vector3(0, 1, dist)
-			).y;
-
-		return Tuple.Create(leftBorder, rightBorder, topBorder, bottomBorder);
+		return numberOfPowers;
 	}
 
-	//Calculate the horizontal boundaries for a player
-	//TODO: FIX TUPLE ELEMENTS SIZE TO 2
-	private Tuple<float, float, float, float> getPlayerHorizontalBorders(float leftCameraBorder, float rightCameraBorder)
+	/*	Add the value parameter to modify the number of powers in use by the player
+		The value will not be under zero, even if the value parameter is a negative
+		greater in module than the current number of powers value
+	*/
+	public void numberOfPowersAddBy(int value)
 	{
-		float leftBorder;
-		float rightBorder;
+		numberOfPowers += value;
 
-		//Sum, because the values of  this two borders are symmetric
-		float center = leftCameraBorder + rightCameraBorder;
-
-		if(isPlayer1)
-		{
-			leftBorder = Mathf.Ceil(leftCameraBorder);
-			rightBorder = center - slack;
-		}
-		else
-		{
-			leftBorder = center + slack;
-			rightBorder = Mathf.Floor(rightCameraBorder);
-		}
-
-		return Tuple.Create(leftBorder, rightBorder, 0f, 0f);
+		if(numberOfPowers < 0)
+			numberOfPowers = 0;
 	}
 
 }

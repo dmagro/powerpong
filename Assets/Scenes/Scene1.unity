@@ -824,6 +824,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1421208004}
   - 114: {fileID: 1421208005}
+  - 114: {fileID: 1421208006}
   m_Layer: 0
   m_Name: Scripts
   m_TagString: Untagged
@@ -857,6 +858,21 @@ MonoBehaviour:
   ballPrefab: {fileID: 400000, guid: 1bab6d88fda1ebd44b07b0e8aaaf831d, type: 2}
   player1ScoreGui: {fileID: 258690906}
   player2ScoreGui: {fileID: 1219173151}
+--- !u!114 &1421208006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1421208003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fb0d1ca1d8a85d4a8644346545bf458, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powersPrefabs:
+  - {fileID: 400000, guid: bf73f9a4e32d58941b366818add771c3, type: 2}
+  spawnWait: 10
+  startWait: 5
 --- !u!1 &1850736551
 GameObject:
   m_ObjectHideFlags: 0
