@@ -3,7 +3,6 @@ using System.Collections;
 
 public class PowerScript : MonoBehaviour 
 {
-
 	private float lifetime = 5.0f;
 
 	// Use this for initialization
@@ -12,22 +11,18 @@ public class PowerScript : MonoBehaviour
 		Destroy(gameObject, lifetime);
 	}
 
-	void OnCollisionEnter2D(Collision2D coll)
-	{
-		if(coll.collider.tag == "Player")
-		{
-			PlayerScript player = coll.gameObject.GetComponent<PlayerScript>();
-
-			if(player.getNumberOfPowers() < player.maxPowers)
-				usePower(player);
-
-			Destroy(gameObject);
-		}
-	}
-
 	void OnTriggerEnter2D(Collider2D coll)
 	{
-		if(coll.tag == "Ball")
+		if(coll.tag == "Player")
+		{
+			PlayerScript player = coll.gameObject.GetComponent<PlayerScript>();
+			
+			if(player.getNumberOfPowers() < player.maxPowers)
+				usePower(player);
+			
+			Destroy(gameObject);
+		}
+		else if(coll.tag == "Ball")
 			Physics2D.IgnoreCollision(coll, collider2D);
 	}
 

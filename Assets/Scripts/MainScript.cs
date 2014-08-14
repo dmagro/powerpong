@@ -57,6 +57,8 @@ public class MainScript : MonoBehaviour
 
 		positioningPlayers();
 
+		removePlayersPowers();
+
 		createBall();
 	}
 
@@ -79,6 +81,18 @@ public class MainScript : MonoBehaviour
 	{
 		GameObject player = GameObject.Find(name);
 		player.transform.position = new Vector3(x,y,z);
+	}
+
+	private void removePlayersPowers()
+	{
+		removePlayerPower(namePlayer1);
+		removePlayerPower(namePlayer2);
+	}
+
+	private void removePlayerPower(string name)
+	{
+		GameObject player = GameObject.Find(name);
+		(player.GetComponent<PlayerScript>()).dequeuePower();
 	}
 	
 }

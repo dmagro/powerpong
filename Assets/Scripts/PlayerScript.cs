@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class PlayerScript : MonoBehaviour
 	public Vector2 speed = new Vector2(7,7);
 	public bool isPlayer1 = true;
 
+	private Queue<int> activePowers = new Queue<int>();
 	private Vector2 movement;
 	private int numberOfPowers = 0;
 
@@ -81,6 +83,20 @@ public class PlayerScript : MonoBehaviour
 
 		if(numberOfPowers < 0)
 			numberOfPowers = 0;
+	}
+
+	public void enqueuePower(int power)
+	{
+		activePowers.Enqueue(power);
+	}
+
+	public void dequeuePower()
+	{
+		if(activePowers.Count > 0)
+		{
+			int power = activePowers.Dequeue();
+			PowersUtilities.reversePower(this, power);
+		}
 	}
 
 }
