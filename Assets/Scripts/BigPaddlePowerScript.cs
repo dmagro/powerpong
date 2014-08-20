@@ -3,6 +3,7 @@ using System.Collections;
 
 public class BigPaddlePowerScript : PowerScript 
 {
+	private float addSize = 1.5f;
 
 	public override void Start () 
 	{
@@ -13,6 +14,8 @@ public class BigPaddlePowerScript : PowerScript
 	{
 		base.usePower(player);
 		player.enqueuePower((int)PowersUtilities.Powers.BigPaddle);
-		player.transform.localScale = new Vector3(0.5f, 4f, 1f);
+		player.transform.localScale = new Vector3(PowersUtilities.xPlayerSize + addSize,
+		                                          PowersUtilities.yPlayerSize + addSize,
+		                                          PowersUtilities.zPlayerSize);
 	}
 }

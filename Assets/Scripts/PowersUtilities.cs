@@ -5,9 +5,9 @@ public static class PowersUtilities
 {
 
 	//Standard dimensions of the players paddle
-	const float xPlayerSize = 0.5f;
-	const float yPlayerSize = 2.5f;
-	const float zPlayerSize = 1f;
+	public const float xPlayerSize = 2f;
+	public const float yPlayerSize = 2.5f;
+	public const float zPlayerSize = 1f;
 
 	//Types of powers
 	public enum Powers { BigPaddle } ;
